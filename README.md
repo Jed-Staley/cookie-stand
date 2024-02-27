@@ -20,8 +20,12 @@ This is a website for selling salmon cookies and for presenting their sales data
 
 #### Monday
 
-* <./images/'Screenshot (6).png>
+* <./images/'Screenshot (6).png'>
+
+#### Tuesday
+
+* <./images/'Screenshot (8).png'>
 
 ### Reflections and Comments
 
-* Everything has been straightforward, just need to get more CSS practice.
+* Everything went extrmemely smoothly today.
