@@ -42,8 +42,23 @@ body {
     margin-top: 18%;
     margin-bottom: 15%;
     
-    li {
-      color: gray;
+    table {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-collapse: collapse;
+      
+      th {
+        background-color: #ccc;
+      }
+
+      td, th {
+        margin: 0;
+        border: 2px solid black;
+        padding: 0.5em;
+      
+      }
     }
   }
 
