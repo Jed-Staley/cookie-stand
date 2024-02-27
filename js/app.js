@@ -1,59 +1,75 @@
 'use strict';
 
-// creates an object literal for a single store when given its minimum hourly customers (minTrafic),
-// maximum hourly customers (maxTraffic), and the average number of cookies per order (avrgOrderSize)
-function createNewStore(minTraffic, maxTraffic, avrgOrderSize) {
-  return {
-    minTraf: minTraffic,
-    maxTraf: maxTraffic,
-    orderSize: avrgOrderSize
-  };
+// creates a new Store object with the provided data
+function Store(htmlID, minTraffic, maxTraffic, avrgOrderSize) {
+  this.ID = htmlID;
+  this.minTraf = minTraffic;
+  this.maxTraf = maxTraffic;
+  this.orderSize = avrgOrderSize;
 }
 
-// simulates the sales data for a single store
-function simulate(storeData) {
-  let range = (storeData.maxTraf - storeData.minTraf) + 1;
+// simulates the sales data for the store and stores it by the hour as an array in a new property "simSales" of the store object
+Store.prototype.simulateSales = function () {
+  let range = (this.maxTraf - this.minTraf) + 1;
   let hours = [];
   let total = 0;
   for (let i = 0; i < 14; i++) {
-    hours.push(Math.ceil(storeData.orderSize * Math.floor((range * Math.random()) + storeData.minTraf)));
+    hours.push(Math.ceil(this.orderSize * Math.floor((range * Math.random()) + this.minTraf)));
     total += hours[i];
   }
   hours.push(total);
-  storeData.simSales = hours;
-}
+  this.simSales = hours;
+};
 
-function addNewLine(storeName, lineNumber, htmlId) {
-  const unorderedList = document.getElementById(htmlId);
-  const newElement = document.createElement('li');
-  let hours = ['6am: ', '7am: ', '8am: ', '9am: ', '10am: ', '11am: ', '12pm: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: ', '6pm: ', '7pm: ', 'Total: '];
-  newElement.textContent = hours[lineNumber] + storeName.simSales[lineNumber] + ' cookies';
-  unorderedList.appendChild(newElement);
-}
+// creates table header
+function createTableHeader() {
+  // creates header row
+  const table = document.getElementById('table');
+  const newRow = document.createElement('tr');
+  newRow.id = 'tableHeaderRow';
+  table.appendChild(newRow);
 
-function addLinesForStore(storeName, htmlId) {
-  for (let i = 0; i < 15; i++) {
-    addNewLine(storeName, i, htmlId);
+  // creates header cells
+  let hours = ['', '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', 'Daily Location Total'];
+  const headerRow = document.getElementById('tableHeaderRow');
+  for (let i = 0; i < 16; i++) {
+    const newHeaderCell = document.createElement('td');
+    newHeaderCell.innerText = hours[i];
+    headerRow.appendChild(newHeaderCell);
   }
 }
 
-// loads the simulated sales for the stores
+// renders the data for the store to the page
+Store.prototype.renderData = function () {
+  const table = document.getElementById('table');
+  const newRow = document.createElement('tr');
+  newRow.id = 'tableStoreRow';
+  table.appendChild(newRow);
+};
+
+// loads the stores and renders their simulated sales to the page
 function loadSalesPage() {
-  let seattle = createNewStore(23, 65, 6.3);
-  let tokyo = createNewStore(3, 24, 1.2);
-  let dubai = createNewStore(11, 38, 3.7);
-  let paris = createNewStore(20, 38, 2.3);
-  let lima = createNewStore(2, 16, 4.6);
-  simulate(seattle);
-  simulate(tokyo);
-  simulate(dubai);
-  simulate(paris);
-  simulate(lima);
-  addLinesForStore(seattle, 'seattle');
-  addLinesForStore(tokyo, 'tokyo');
-  addLinesForStore(dubai, 'dubai');
-  addLinesForStore(paris, 'paris');
-  addLinesForStore(lima, 'lima');
+  // creates store objects
+  let seattle = new Store('seattle', 23, 65, 6.3);
+  let tokyo = new Store('tokyo', 3, 24, 1.2);
+  let dubai = new Store('dubai', 11, 38, 3.7);
+  let paris = new Store('paris', 20, 38, 2.3);
+  let lima = new Store('lima', 2, 16, 4.6);
+
+  // creates sales data for each store
+  seattle.simulateSales();
+  tokyo.simulateSales();
+  dubai.simulateSales();
+  paris.simulateSales();
+  lima.simulateSales();
+
+  // renders sales data to page
+  createTableHeader();
+  seattle.renderData();
+  tokyo.renderData();
+  dubai.renderData();
+  paris.renderData();
+  lima.renderData();
 }
 
 loadSalesPage();
