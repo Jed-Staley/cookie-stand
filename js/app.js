@@ -1,59 +1,43 @@
 'use strict';
 
-// creates an object literal for a single store when given its minimum hourly customers (minTrafic),
-// maximum hourly customers (maxTraffic), and the average number of cookies per order (avrgOrderSize)
-function createNewStore(minTraffic, maxTraffic, avrgOrderSize) {
-  return {
+function addStore(htmlID, minTraffic, maxTraffic, avrgOrderSize) {
+  // creates an object literal for a single store when given its parent element ID, minimum hourly customers (minTrafic),
+  // maximum hourly customers (maxTraffic), and the average number of cookies per order (avrgOrderSize)
+  let storeObject = {
+    ID: htmlID,
     minTraf: minTraffic,
     maxTraf: maxTraffic,
     orderSize: avrgOrderSize
   };
-}
 
-// simulates the sales data for a single store
-function simulate(storeData) {
-  let range = (storeData.maxTraf - storeData.minTraf) + 1;
+  // simulates the sales data for the store and stores it by the hour as an array in a new property "simSales" of the store object
+  let range = (storeObject.maxTraf - storeObject.minTraf) + 1;
   let hours = [];
   let total = 0;
   for (let i = 0; i < 14; i++) {
-    hours.push(Math.ceil(storeData.orderSize * Math.floor((range * Math.random()) + storeData.minTraf)));
+    hours.push(Math.ceil(storeObject.orderSize * Math.floor((range * Math.random()) + storeObject.minTraf)));
     total += hours[i];
   }
   hours.push(total);
-  storeData.simSales = hours;
-}
+  storeObject.simSales = hours;
 
-function addNewLine(storeName, lineNumber, htmlId) {
-  const unorderedList = document.getElementById(htmlId);
-  const newElement = document.createElement('li');
-  let hours = ['6am: ', '7am: ', '8am: ', '9am: ', '10am: ', '11am: ', '12pm: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: ', '6pm: ', '7pm: ', 'Total: '];
-  newElement.textContent = hours[lineNumber] + storeName.simSales[lineNumber] + ' cookies';
-  unorderedList.appendChild(newElement);
-}
-
-function addLinesForStore(storeName, htmlId) {
+  // renders the data for the store
   for (let i = 0; i < 15; i++) {
-    addNewLine(storeName, i, htmlId);
+    const unorderedList = document.getElementById(storeObject.ID);
+    const newElement = document.createElement('li');
+    let hours = ['6am: ', '7am: ', '8am: ', '9am: ', '10am: ', '11am: ', '12pm: ', '1pm: ', '2pm: ', '3pm: ', '4pm: ', '5pm: ', '6pm: ', '7pm: ', 'Total: '];
+    newElement.textContent = hours[i] + storeObject.simSales[i] + ' cookies';
+    unorderedList.appendChild(newElement);
   }
 }
 
 // loads the simulated sales for the stores
 function loadSalesPage() {
-  let seattle = createNewStore(23, 65, 6.3);
-  let tokyo = createNewStore(3, 24, 1.2);
-  let dubai = createNewStore(11, 38, 3.7);
-  let paris = createNewStore(20, 38, 2.3);
-  let lima = createNewStore(2, 16, 4.6);
-  simulate(seattle);
-  simulate(tokyo);
-  simulate(dubai);
-  simulate(paris);
-  simulate(lima);
-  addLinesForStore(seattle, 'seattle');
-  addLinesForStore(tokyo, 'tokyo');
-  addLinesForStore(dubai, 'dubai');
-  addLinesForStore(paris, 'paris');
-  addLinesForStore(lima, 'lima');
+  addStore('seattle', 23, 65, 6.3);
+  addStore('tokyo', 3, 24, 1.2);
+  addStore('dubai', 11, 38, 3.7);
+  addStore('paris', 20, 38, 2.3);
+  addStore('lima', 2, 16, 4.6);
 }
 
 loadSalesPage();
