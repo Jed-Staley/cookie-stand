@@ -20,12 +20,16 @@ This is a website for selling salmon cookies and for presenting their sales data
 
 #### Monday
 
-* <./images/'Screenshot (6).png'>
+* ![Screenshot 1](<images/Screenshot (6).png>)
 
 #### Tuesday
 
-* <./images/'Screenshot (8).png'>
+* ![Screenshot 2](<images/Screenshot (8).png>)
+
+#### Wednesday
+
+* ![Screenshot 3](<images/Screenshot (10).png>)
 
 ### Reflections and Comments
 
-* Everything went extrmemely smoothly today.
+* Cleaned up the JS today and added a new JS file for the darkmode. Everything went well.
