@@ -1,26 +1,25 @@
 'use strict';
 
+let stores = [];
+
 // creates a new Store object with the provided data
 function Store(htmlID, minTraffic, maxTraffic, avrgOrderSize) {
   this.ID = htmlID;
   this.minTraf = minTraffic;
   this.maxTraf = maxTraffic;
   this.orderSize = avrgOrderSize;
-}
 
-// simulates the sales data for the store and stores it by the hour as an array in a new property "simSales" of the store object
-Store.prototype.simulateSales = function () {
+  // simulates the sales data for the store and stores it by the hour as an array in a new property "simSales"
   let range = (this.maxTraf - this.minTraf) + 1;
   let name = this.ID.charAt(0).toUpperCase() + this.ID.slice(1);
-  let hourSales = [name];
+  this.simSales = [name];
   let total = 0;
-  for (let i = 1; i < 15; i++) {
-    hourSales.push(Math.ceil(this.orderSize * Math.floor((range * Math.random()) + this.minTraf)));
-    total += hourSales[i];
+  for (let i = 0; i < 14; i++) {
+    this.simSales.push(Math.ceil(this.orderSize * Math.floor((range * Math.random()) + this.minTraf)));
+    total += this.simSales[i + 1];
   }
-  hourSales.push(total);
-  this.simSales = hourSales;
-};
+  this.simSales.push(total);
+}
 
 // creates table header
 function createTableHeader() {
@@ -88,13 +87,6 @@ function loadSalesPage() {
   let dubai = new Store('dubai', 11, 38, 3.7);
   let paris = new Store('paris', 20, 38, 2.3);
   let lima = new Store('lima', 2, 16, 4.6);
-
-  // creates sales data for each store
-  seattle.simulateSales();
-  tokyo.simulateSales();
-  dubai.simulateSales();
-  paris.simulateSales();
-  lima.simulateSales();
 
   // renders sales data to page
   createTableHeader();
