@@ -1,6 +1,7 @@
 'use strict';
 
 let stores = [];
+let footerTotals = ['All Combined', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 // creates a new Store object with the provided data
 function Store(htmlID, minTraffic, maxTraffic, avrgOrderSize) {
@@ -15,10 +16,15 @@ function Store(htmlID, minTraffic, maxTraffic, avrgOrderSize) {
   this.simSales = [name];
   let total = 0;
   for (let i = 0; i < 14; i++) {
-    this.simSales.push(Math.ceil(this.orderSize * Math.floor((range * Math.random()) + this.minTraf)));
-    total += this.simSales[i + 1];
+    let newHourValue = Math.ceil(this.orderSize * Math.floor((range * Math.random()) + this.minTraf));
+    this.simSales.push(newHourValue);
+    total += newHourValue;
+    footerTotals[i + 1] += newHourValue;
   }
   this.simSales.push(total);
+  footerTotals[15] += total;
+
+  stores.push(this);
 }
 
 // creates table header
@@ -40,7 +46,6 @@ function createTableHeader() {
 }
 
 // renders the data for the store to the page
-let totals = ['All Combined', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Store.prototype.renderData = function () {
   // creates row with custom ID
   const table = document.getElementById('table');
@@ -54,9 +59,6 @@ Store.prototype.renderData = function () {
     const newCell = document.createElement('td');
     newCell.innerText = this.simSales[i];
     storeRow.appendChild(newCell);
-    if (i !== 0) {
-      totals[i] += this.simSales[i];
-    }
   }
 
   // resets the row's ID so that the next row can use the same ID
@@ -75,26 +77,25 @@ function createTableFooter() {
   const footerRow = document.getElementById('tableFooterRow');
   for (let i = 0; i < 16; i++) {
     const newFooterCell = document.createElement('td');
-    newFooterCell.innerText = totals[i];
+    newFooterCell.innerText = footerTotals[i];
     footerRow.appendChild(newFooterCell);
   }
 }
+
 // loads the stores and renders their simulated sales to the page
 function loadSalesPage() {
   // creates store objects
-  let seattle = new Store('seattle', 23, 65, 6.3);
-  let tokyo = new Store('tokyo', 3, 24, 1.2);
-  let dubai = new Store('dubai', 11, 38, 3.7);
-  let paris = new Store('paris', 20, 38, 2.3);
-  let lima = new Store('lima', 2, 16, 4.6);
+  new Store('seattle', 23, 65, 6.3);
+  new Store('tokyo', 3, 24, 1.2);
+  new Store('dubai', 11, 38, 3.7);
+  new Store('paris', 20, 38, 2.3);
+  new Store('lima', 2, 16, 4.6);
 
   // renders sales data to page
   createTableHeader();
-  seattle.renderData();
-  tokyo.renderData();
-  dubai.renderData();
-  paris.renderData();
-  lima.renderData();
+  for (let store of stores) {
+    store.renderData();
+  }
   createTableFooter();
 }
 
