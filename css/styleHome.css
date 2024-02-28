@@ -29,12 +29,23 @@ body {
       color: black;
       position: absolute;
       width: 100%;
+      z-index: 1;
 
       p {
         display: inline-block;
         margin-left: 5em;
         margin-right: 5em;
       }
+    }
+
+    #darkMode {
+      position: absolute;
+      background-color: ivory;
+      color: black;
+      border: 3px solid black;
+      z-index: 5;
+      right: 3em;
+      top: 2.2em;
     }
   }
 

@@ -40,6 +40,8 @@ function createTableHeader() {
   const headerRow = document.getElementById('tableHeaderRow');
   for (let i = 0; i < 16; i++) {
     const newHeaderCell = document.createElement('th');
+    let ID = 'headerCell-' + i;
+    newHeaderCell.id = ID;
     newHeaderCell.innerText = hours[i];
     headerRow.appendChild(newHeaderCell);
   }

@@ -36,6 +36,16 @@ body {
         margin-right: 5em;
       }
     }
+
+    #darkMode {
+      position: absolute;
+      background-color: ivory;
+      color: black;
+      border: 3px solid black;
+      z-index: 5;
+      right: 3em;
+      top: 2.2em;
+    }
   }
 
   main {
