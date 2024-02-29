@@ -1,11 +1,11 @@
-const darkButton = document.querySelector('#darkMode');
+const darkButtonSales = document.querySelector('#darkModeSales');
 const body = document.querySelector('body');
 const footer = document.querySelector('footer');
-let darkModeStatus = false;
+let darkModeStatus = sessionStorage.getItem('darkModeStatus') === 'true';
 
 function darkModeUpdate() {
   if (darkModeStatus) {
-    darkButton.textContent = 'Dark Mode: On';
+    darkButtonSales.textContent = 'Dark Mode: On';
     body.style.backgroundColor = '#3c3c3c';
     body.style.color = 'white';
     footer.style.backgroundColor = '#787878';
@@ -15,7 +15,7 @@ function darkModeUpdate() {
       headerCell.style.backgroundColor = '#787878';
     }
   } else {
-    darkButton.textContent = 'Dark Mode: Off';
+    darkButtonSales.textContent = 'Dark Mode: Off';
     body.style.backgroundColor = 'white';
     body.style.color = 'black';
     footer.style.backgroundColor = '#ccc';
@@ -29,7 +29,9 @@ function darkModeUpdate() {
 
 function darkModeToggle() {
   darkModeStatus = !darkModeStatus;
+  sessionStorage.setItem('darkModeStatus', darkModeStatus);
   darkModeUpdate();
 }
 
-darkButton.onclick = function() {darkModeToggle();};
+darkModeUpdate();
+darkButtonSales.onclick = function() {darkModeToggle();};
