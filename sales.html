@@ -17,6 +17,24 @@
       <button id="darkModeSales">Dark Mode: Off</button>
     </header>
     <main>
+      <form id="cookieStandForm">
+        <fieldset>
+          <legend>Add New Store</legend>
+          <label>
+            <input type="text" id="storeName" placeholder="Store Name"/>
+          </label>
+          <label>
+            <input type="number" id="newMinTraf" placeholder="Maximum Customers per Hour"/>
+          </label>
+          <label>
+            <input type="number" id="newMaxTraf" placeholder="Minimum Customers per Hour"/>
+          </label>
+          <label>
+            <input type="number" id="newAvgOrder" placeholder="Avg Cookies per Sale"/>
+          </label>
+          <button type="submit" id="reloadButton">Add Cookie Stand</button>
+        </fieldset>
+      </form>
       <table id="table"></table>
     </main>
     <footer>

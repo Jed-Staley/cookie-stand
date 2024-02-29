@@ -49,14 +49,22 @@ body {
   }
 
   main {
-    margin-top: 18%;
+    margin-top: 10%;
     margin-bottom: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
+    fieldset {  
+      margin: 0;
+      padding: 0;
+      div {
+        display: inline-block;
+      }
+    }
+
     table {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      margin: 3% auto auto auto;
       border-collapse: collapse;
       
       th {
@@ -69,6 +77,34 @@ body {
         padding: 0.5em;
       
       }
+    }
+  }
+
+  #cookieStandForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #cookieStandForm label {
+    margin: 5px;
+  }
+  
+  #cookieStandForm input,
+  #cookieStandForm button {
+    margin: 5px;
+    width: 200px;
+  }
+  
+  #cookieStandForm button {
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 600px) {
+    #cookieStandForm input,
+    #cookieStandForm button {
+      width: calc(50% - 10px);
     }
   }
 

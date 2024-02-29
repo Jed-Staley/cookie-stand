@@ -86,19 +86,34 @@ function createTableFooter() {
 
 // loads the stores and renders their simulated sales to the page
 function loadSalesPage() {
-  // creates store objects
-  new Store('seattle', 23, 65, 6.3);
-  new Store('tokyo', 3, 24, 1.2);
-  new Store('dubai', 11, 38, 3.7);
-  new Store('paris', 20, 38, 2.3);
-  new Store('lima', 2, 16, 4.6);
-
-  // renders sales data to page
   createTableHeader();
   for (let store of stores) {
     store.renderData();
   }
   createTableFooter();
 }
+
+new Store('seattle', 23, 65, 6.3);
+new Store('tokyo', 3, 24, 1.2);
+new Store('dubai', 11, 38, 3.7);
+new Store('paris', 20, 38, 2.3);
+new Store('lima', 2, 16, 4.6);
+
+document.getElementById('cookieStandForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const table = document.querySelector('table');
+  while (table.firstChild) {
+    table.removeChild(table.firstChild);
+  }
+
+  let newStoreName = document.getElementById('storeName').value;
+  let newMinTraf = parseFloat(document.getElementById('newMinTraf').value);
+  let newMaxTraf = parseFloat(document.getElementById('newMaxTraf').value);
+  let newOrderSize = parseFloat(document.getElementById('newAvgOrder').value);
+
+  new Store(newStoreName, newMinTraf, newMaxTraf, newOrderSize);
+  loadSalesPage();
+});
 
 loadSalesPage();
