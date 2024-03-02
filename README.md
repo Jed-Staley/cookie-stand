@@ -20,15 +20,19 @@ This is a website for selling salmon cookies and for presenting their sales data
 
 #### Monday
 
-* ![Screenshot 1](<images/Screenshot (6).png>)
+* ![Screenshot 1](<images/Screenshot Monday.png>)
 
 #### Tuesday
 
-* ![Screenshot 2](<images/Screenshot (8).png>)
+* ![Screenshot 2](<images/Screenshot Tuesday.png>)
 
 #### Wednesday
 
-* ![Screenshot 3](<images/Screenshot (10).png>)
+* ![Screenshot 3](<images/Screenshot Wednesday.png>)
+
+#### Thursday
+
+* ![Screenshot 4](<images/Screenshot Thursday.png>)
 
 ### Reflections and Comments
 

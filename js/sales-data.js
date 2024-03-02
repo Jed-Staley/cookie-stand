@@ -91,6 +91,7 @@ function loadSalesPage() {
     store.renderData();
   }
   createTableFooter();
+  darkModeUpdate();
 }
 
 new Store('seattle', 23, 65, 6.3);
